@@ -1,1 +1,1 @@
-include ':sample', ':permission-annotation'
+include ':sample', ':permission-annotation',':permission-api'
