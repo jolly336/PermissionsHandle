@@ -80,7 +80,7 @@ public class ProxyInfo {
         needShowRationaleMethod.beginControlFlow("switch(requestCode)");
         for (int code : mRationaleMethodMap.keySet()) {
             needShowRationaleMethod.addCode("case $L:\n", code)
-                    .addStatement("return true");
+                    .addStatement("$> return true$<");
         }
         needShowRationaleMethod.endControlFlow();
 
@@ -112,8 +112,8 @@ public class ProxyInfo {
         builder.beginControlFlow("switch(requestCode)");
         for (int code : map.keySet()) {
             builder.addCode("case $L:\n", code)
-                    .addStatement("source.$L" + "()", map.get(code))
-                    .addStatement("break");
+                    .addStatement("$>source.$L" + "()", map.get(code))
+                    .addStatement("break$<");
         }
         builder.endControlFlow();
         return builder;
