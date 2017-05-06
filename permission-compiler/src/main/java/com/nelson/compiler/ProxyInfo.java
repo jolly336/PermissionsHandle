@@ -1,8 +1,16 @@
 package com.nelson.compiler;
 
+import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.JavaFile;
+import com.squareup.javapoet.MethodSpec;
+import com.squareup.javapoet.ParameterizedTypeName;
+import com.squareup.javapoet.TypeName;
+import com.squareup.javapoet.TypeSpec;
+
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
@@ -36,8 +44,9 @@ public class ProxyInfo {
         return mPackageName + "." + mProxyClassName;
     }
 
-    String brewJavaCode() {
-        StringBuilder builder = new StringBuilder();
+    JavaFile brewJavaCode() {
+        //---manual generate---
+       /* StringBuilder builder = new StringBuilder();
         builder.append("// Generated code.Do not modify!\n");
         builder.append("package ").append(mPackageName).append(";\n\n");
         builder.append("import com.nelson.api.*;\n");
@@ -50,9 +59,69 @@ public class ProxyInfo {
         builder.append("\n");
 
         builder.append("}\n");
-        return builder.toString();
+        return builder.toString();*/
+
+        //---javapoet---
+        ClassName interfaceName = ClassName.get("com.nelson.api", PROXY);
+        ClassName superinterface = ClassName.bestGuess(mTypeElement.getQualifiedName().toString());
+
+        TypeSpec.Builder typeSpec = TypeSpec.classBuilder(mProxyClassName)
+                .addModifiers(Modifier.PUBLIC)
+                // 添加接口，ParameterizedTypeName参数1是接口，参数2是接口的泛型
+                .addSuperinterface(ParameterizedTypeName.get(interfaceName, superinterface));
+
+
+        MethodSpec.Builder needShowRationaleMethod = MethodSpec.methodBuilder("needShowRationale")
+                .addModifiers(Modifier.PUBLIC)
+                .addAnnotation(Override.class)
+                .returns(TypeName.BOOLEAN)
+                .addParameter(TypeName.INT, "requestCode");
+
+        needShowRationaleMethod.beginControlFlow("switch(requestCode)");
+        for (int code : mRationaleMethodMap.keySet()) {
+            needShowRationaleMethod.addCode("case $L:\n", code)
+                    .addStatement("return true");
+        }
+        needShowRationaleMethod.endControlFlow();
+
+        needShowRationaleMethod.addStatement("return false");
+
+        TypeSpec proxyClass = typeSpec.addMethod(generatMethod("grant", mGrantMethodMap).build())
+                .addMethod(generatMethod("denied", mDeniedMethodMap).build())
+                .addMethod(generatMethod("rationale", mRationaleMethodMap).build())
+                .addMethod(needShowRationaleMethod.build())
+                .build();
+
+        return JavaFile.builder(mPackageName, proxyClass)
+                .addFileComment("Generated code from PermissionHandle. Do not modity!")
+                .build();
     }
 
+    //-----Javapoet java library-------
+    private MethodSpec.Builder generatMethod(String methodName, Map<Integer, String> map) {
+
+        ClassName parameterName = ClassName.bestGuess(mTypeElement.getQualifiedName().toString());
+
+        MethodSpec.Builder builder = MethodSpec.methodBuilder(methodName)
+                .addModifiers(Modifier.PUBLIC)
+                .addAnnotation(Override.class)
+                .returns(TypeName.VOID)
+                .addParameter(parameterName, "source")
+                .addParameter(TypeName.INT, "requestCode");
+
+        builder.beginControlFlow("switch(requestCode)");
+        for (int code : map.keySet()) {
+            builder.addCode("case $L:\n", code)
+                    .addStatement("source.$L" + "()", map.get(code))
+                    .addStatement("break");
+        }
+        builder.endControlFlow();
+        return builder;
+    }
+
+    //=====================================================
+
+    //-----Manually generate java code-----
     private void generateMethods(StringBuilder builder) {
         generateGrantMethod(builder);
         generateDeniedMethod(builder);

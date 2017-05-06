@@ -86,7 +86,8 @@ public class PermissionProcessor extends AbstractProcessor {
                         proxyInfo.getProxyClassFullName(),
                         proxyInfo.getTypeElement());
                 Writer writer = javaFileObj.openWriter();
-                writer.write(proxyInfo.brewJavaCode());
+                //writer.write(proxyInfo.brewJavaCode());
+                proxyInfo.brewJavaCode().writeTo(writer);
                 writer.flush();
                 writer.close();
             } catch (IOException e) {
