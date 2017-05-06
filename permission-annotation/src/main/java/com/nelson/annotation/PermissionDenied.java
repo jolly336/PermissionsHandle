@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * Created by Nelson on 17/5/5.
  */
 
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.METHOD)
 @Documented
 public @interface PermissionDenied {

@@ -13,14 +13,18 @@
         android:id="@+id/btn_sdcard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="doTestSdcard"
         android:text="Test W/R Sdcard"/>
 
     <Button
         android:id="@+id/btn_call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="doTestCallPhone"
         android:text="Test call phone"/>
+
+    <Button
+        android:id="@+id/btn_open_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test open camera"/>
 
 </LinearLayout>

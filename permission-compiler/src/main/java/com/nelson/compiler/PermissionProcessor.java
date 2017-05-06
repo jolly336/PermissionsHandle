@@ -1,5 +1,6 @@
 package com.nelson.compiler;
 
+import com.google.auto.service.AutoService;
 import com.nelson.annotation.PermissionDenied;
 import com.nelson.annotation.PermissionGrant;
 import com.nelson.annotation.ShowRequestPermissionRationale;
@@ -16,6 +17,7 @@ import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
+import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
@@ -30,7 +32,7 @@ import javax.tools.FileObject;
  * Annotation processor
  * Created by Nelson on 17/5/5.
  */
-
+@AutoService(Processor.class)
 public class PermissionProcessor extends AbstractProcessor {
 
     private Messager mMessager;
