@@ -106,7 +106,8 @@ public void onRequestPermissionsResult(int requestCode, String[] permissions, in
 ```
 
 当用户选择允许，我们就可以在onRequestPermissionsResult方法中进行响应的处理，比如打开摄像头，进行下一步操作。当用户拒绝，你的应用可能就开始危险了，当我们再次尝试申请权限时，弹出的对话框和之前有点不一样了，主要表现为多了一个checkbox复选框。如下图
-![再次请求拍照时](/screenshots/open_camera_again.png)
+
+再次请求拍照时<img src="/screenshots/open_camera_again.png" width="280px"/>
 
 当用户勾选了”不再询问“拒绝后，你的程序基本这个权限就Game Over了。
 不过，你还有一丝希望，那就是再出现上述的对话框之前做一些说明信息，比如你使用这个权限的目的（一定要坦白）。
