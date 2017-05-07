@@ -93,7 +93,7 @@ public class ProxyInfo {
                 .build();
 
         return JavaFile.builder(mPackageName, proxyClass)
-                .addFileComment("Generated code from PermissionHandle. Do not modity!")
+                .addFileComment("Generated code from PermissionHandle processor. Do not modify!")
                 .build();
     }
 
