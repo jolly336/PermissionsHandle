@@ -37,6 +37,8 @@ Android6.0以前的系统，所有权限都是一刀切处理方式，只要用�
 2. group:android.permission-group.CAMERA
   permission:android.permission.CAMERA
 ...
+
+
 可以通过adb shell pm list permissions -d -g进行查看。
 看到上面的dangerous permission会发现危险权限都是一组一组的，分组对于我们会有什么影响吗？的确是有影响的，如果app运行在Android 6.x的系统上，对于授权机制是这样子的，如果你申请某个危险的权限，假设你的app早已被用户授予了同一组的某个危险权限，那么系统会立即授权，而不需要弹窗提示用户点击授权。对于申请时弹出的dialog上面的文本说明也是对整个权限组的说明，而不是单个权限。（注意：权限dialog是不能进行定制的）。
 ps：不过需要注意的是，不要对权限组过多的依赖，尽可能对每个危险权限都进行正常的申请，以为在后面的版本权限组则可能发生变化！
