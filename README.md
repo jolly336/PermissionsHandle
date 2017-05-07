@@ -6,7 +6,8 @@
 ### 6.0以前权限一刀切
 Android6.0以前的系统，所有权限都是一刀切处理方式，只要用户安装了应用，Manifest清单中申请的权限都会被赋予，且安装后撤销不了。当弹出安装对话框后，用户只有两个选择，要么选择安装，默认所有的敏感权限；要么拒绝安装应用。所以，这种一刀切的处理方式，我们是没有办法只允许某些权限或者拒绝某些权限。例如，小米5手机安装应用的情景。
 
-<img src="http://opkjcw4sd.bkt.clouddn.com/app_install_before.png" width="280px"/>&emsp;<img src="http://opkjcw4sd.bkt.clouddn.com/app_installing.png" width="280px"/>
+<img src="http://opkjcw4sd.bkt.clouddn.com/app_install_before.png" width="280px"/>&emsp;<img src="http://opkjcw4sd.bkt.clouddn.com/app_installing.png" 
+width="280px"/>
 
 ### 6.0运行时权限
 从Android 6.0M 开始，系统引入了新的运行时权限机制。以某个需要拍照的应用为例，当运行时权限生效时，其Camera权限不是在安装后赋予，而是在应用运行的时候请求权限。比如当用户按下相机拍照按钮后，看到的效果是这样子的，接下来，对于Camera权限的处理权完全交给用户。
