@@ -6,12 +6,12 @@
 ### 6.0以前权限一刀切
 Android6.0以前的系统，所有权限都是一刀切处理方式，只要用户安装了应用，Manifest清单中申请的权限都会被赋予，且安装后撤销不了。当弹出安装对话框后，用户只有两个选择，要么选择安装，默认所有的敏感权限；要么拒绝安装应用。所以，这种一刀切的处理方式，我们是没有办法只允许某些权限或者拒绝某些权限。例如，小米5手机安装应用的情景。
 
-<img src="/screenshots/app_install_before.png" width="280px"/>&emsp;<img src="/screenshots/app_installing.png" width="280px"/>
+<img src="http://opkjcw4sd.bkt.clouddn.com/app_install_before.png" width="280px"/>&emsp;<img src="http://opkjcw4sd.bkt.clouddn.com/app_installing.png" width="280px"/>
 
 ### 6.0运行时权限
 从Android 6.0M 开始，系统引入了新的运行时权限机制。以某个需要拍照的应用为例，当运行时权限生效时，其Camera权限不是在安装后赋予，而是在应用运行的时候请求权限。比如当用户按下相机拍照按钮后，看到的效果是这样子的，接下来，对于Camera权限的处理权完全交给用户。
 
-请求拍照时<img src="/screenshots/open_camera.png" width="280px"/>
+请求拍照时<img src="http://opkjcw4sd.bkt.clouddn.com/open_camera.png" width="280px"/>
 
 ### 权限的分组
 6.0系统对权限进行了分组，一般包括如下几类：
@@ -54,7 +54,7 @@ ps：不过需要注意的是，不要对权限组过多的依赖，尽可能对
 如果你的应用将targetSdkVersion设置低于23，那么在6.x的系统上不会为这个应用开启运行时权限机制，即按照以前的一刀切方式处理。
 然而，6.x系统提供了一个应用权限管理界面，界面长得是这样子的
 
-6.0应用权限管理界面<img src="/screenshots/runtime_permission_manage.png" width="280px"/>
+6.0应用权限管理界面<img src="http://opkjcw4sd.bkt.clouddn.com/runtime_permission_manage.png" width="280px"/>
 
 既然是可以管理的，用户就能取消权限，当一个不支持运行时权限的应用某项权限被取消时，系统会弹出一个对话框提醒撤销的危害，如果用户执意撤销，会带来如下反应：
 * 如果你的应用程序在运行，则会被杀掉
@@ -107,7 +107,7 @@ public void onRequestPermissionsResult(int requestCode, String[] permissions, in
 
 当用户选择允许，我们就可以在onRequestPermissionsResult方法中进行响应的处理，比如打开摄像头，进行下一步操作。当用户拒绝，你的应用可能就开始危险了，当我们再次尝试申请权限时，弹出的对话框和之前有点不一样了，主要表现为多了一个checkbox复选框。如下图
 
-再次请求拍照时<img src="/screenshots/open_camera_again.png" width="280px"/>
+再次请求拍照时<img src="http://opkjcw4sd.bkt.clouddn.com/open_camera_again.jpg" width="280px"/>
 
 当用户勾选了”不再询问“拒绝后，你的程序基本这个权限就Game Over了。
 不过，你还有一丝希望，那就是再出现上述的对话框之前做一些说明信息，比如你使用这个权限的目的（一定要坦白）。
