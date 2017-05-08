@@ -50,17 +50,15 @@ public class MainActivity extends AppCompatActivity {
     public void open(View view) {
         switch (view.getId()) {
             case R.id.btn_sdcard:
-                if (!PermissionsHandle.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, REQUEST_CODE_SDCARD)) {
-                    PermissionsHandle.requestPermissions(this, REQUEST_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                }
+                PermissionsHandle.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, REQUEST_CODE_SDCARD);
+                PermissionsHandle.requestPermissions(this, REQUEST_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 break;
             case R.id.btn_call:
                 PermissionsHandle.requestPermissions(this, REQUEST_CODE_CALL_PHONE, Manifest.permission.CALL_PHONE);
                 break;
             case R.id.btn_open_camera:
-                if (!PermissionsHandle.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA, REQUEST_CODE_OPEN_CAMERA)) {
-                    PermissionsHandle.requestPermissions(this, REQUEST_CODE_OPEN_CAMERA, Manifest.permission.CAMERA);
-                }
+                PermissionsHandle.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA, REQUEST_CODE_OPEN_CAMERA);
+                PermissionsHandle.requestPermissions(this, REQUEST_CODE_OPEN_CAMERA, Manifest.permission.CAMERA);
                 break;
         }
     }
@@ -69,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
     //--------W/R sdcard----------------
     @ShowRequestPermissionRationale(REQUEST_CODE_SDCARD)
     public void whyNeedSdcard() {
+        // explain why you need this dangerous permission...
         Toast.makeText(this, "I need write something to sdcard,please ensure you open this!", Toast.LENGTH_SHORT).show();
-        PermissionsHandle.requestPermissions(this, REQUEST_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
     @PermissionGrant(REQUEST_CODE_SDCARD)
@@ -109,14 +107,15 @@ public class MainActivity extends AppCompatActivity {
 
     @ShowRequestPermissionRationale(REQUEST_CODE_OPEN_CAMERA)
     public void whyNeedCamera() {
+        // explain why you need this dangerous permission...
         Toast.makeText(this, "I need use camera,please ensure you open this!", Toast.LENGTH_SHORT).show();
-        PermissionsHandle.requestPermissions(this, REQUEST_CODE_OPEN_CAMERA, Manifest.permission.CAMERA);
     }
 
     //--------request result----------------
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         PermissionsHandle.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
