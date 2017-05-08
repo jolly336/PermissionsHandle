@@ -147,6 +147,7 @@ private void requestMultiplePermissions() {
 
 ### 多系统问题
 当我们支持了6.0必须也要支持4.4，5.0这些系统，所以需要在很多情况下，需要有两套处理。比如Camera权限
+
 ```java
 if (Util.isOverMarshmallow()) {
     requestPermission();//6.x申请权限
@@ -157,6 +158,29 @@ if (Util.isOverMarshmallow()) {
 
 ## PermissionHandle库使用（封装）
 虽然权限处理并不复杂，但是需要编写很多重复的代码，PermissionHandle借鉴[PermissionGen](https://github.com/lovedise/PermissionGen)库来封装的，基于Annotation Processor编译时注解的方式来实现运行时权限申请回调。
+
+### 引入
+
+project's build.gradle
+
+```
+buildscript {
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+}
+```
+
+module's buid.gradle
+
+```
+apply plugin: 'com.neenbedankt.android-apt'
+
+dependencies {
+    apt 'com.nelson:permission-compiler:1.0.0'
+    compile 'com.nelson:permission-api:1.0.0'
+}
+```
 
 ### 使用
 * 申请权限
