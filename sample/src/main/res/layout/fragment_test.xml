@@ -9,12 +9,14 @@
         android:id="@+id/btn_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="open camera"/>
+        android:text="open camera"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/btn_contract"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="request_contract"/>
+        android:text="request_contract"
+        android:textAllCaps="false"/>
 
 </LinearLayout>

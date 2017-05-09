@@ -227,5 +227,5 @@ dependencies {
 * com.google.auto.service:auto-service:1.0-rc2，auto-service库生成META-INF等信息
 
 # Contacts
- * Email:haoxunwang525@163.com
+ * Email: haoxunwang525@gmail.com or haoxunwang525@163.com 
 

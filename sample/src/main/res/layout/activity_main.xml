@@ -13,18 +13,21 @@
         android:id="@+id/btn_sdcard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test W/R Sdcard"/>
+        android:text="Test W/R Sdcard"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/btn_call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test call phone"/>
+        android:text="Test call phone"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/btn_open_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test open camera"/>
+        android:text="Test open camera"
+        android:textAllCaps="false"/>
 
 </LinearLayout>
